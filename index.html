@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PC Information</title>
+<style>
+body{font-family:Arial;background:#111;color:#fff;text-align:center;padding:30px}
+.card{max-width:650px;margin:auto;background:#1d1d1d;padding:25px;border-radius:15px}
+.row{padding:12px;border-bottom:1px solid #444;text-align:left}
+b{color:#ff4da6}
+button{padding:12px 20px;border:0;border-radius:8px;background:#ff1493;color:white;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>💻 PC Information</h1>
+<p>This page shows information that your browser allows a website to see.</p>
+<div id="info"></div>
+</div>
+<script>
+const nav=navigator;
+let rows=[
+["Operating System",nav.userAgentData?.platform || nav.platform || "Unknown"],
+["Browser",nav.userAgent],
+["CPU threads (logical cores)",nav.hardwareConcurrency || "Not available"],
+["RAM estimate",nav.deviceMemory ? nav.deviceMemory+" GB (approx.)" : "Not available"],
+["Screen",screen.width+" × "+screen.height],
+["Available screen",screen.availWidth+" × "+screen.availHeight],
+["Language",nav.language],
+["Online",nav.onLine ? "Yes":"No"],
+["Touch support",("ontouchstart" in window || nav.maxTouchPoints>0) ? "Yes":"No"],
+["Cookies enabled",nav.cookieEnabled ? "Yes":"No"]
+];
+document.getElementById("info").innerHTML=rows.map(x=>`<div class="row"><b>${x[0]}:</b> ${x[1]}</div>`).join("");
+</script>
+</body>
+</html>
